@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>RichTextBlock.Html2Xaml</id>
+    <version>1.0.0.0</version>
+    <authors>Vincent Hoogendoorn [Macaw]</authors>
+    <owners>Vincent Hoogendoorn [Macaw]</owners>
+    <description>
+      RichTextBlock.Html2Xaml adds a Html property to RichTextBlock controls,
+      that translates Html formatted text on the fly to the subset of XAML
+      that the RichTextBlock control supports, with just two source 
+      files that are simple to modify: one C#, one XSLT.
+    </description>
+    <summary>
+       Display HTML formatted text as XAML in a WinRT RichTextBlock control
+    </summary>
+    <licenseUrl>http://macawnl.github.com/RichTextBlock.Html2Xaml/</licenseUrl>
+    <projectUrl>http://macawnl.github.com/RichTextBlock.Html2Xaml/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>WinRT Win8 HTML XAML RichTextBlock</tags>
+  </metadata>
+  <!--<files>
+    --><!-- DesignFactory.WebMatrix.Executer.dll file must be copied to output folder, but not referenced.
+         We add the file to the project folder, and the Install.ps1 script will set it's Build Action 
+         to None, and Copy to Output Directory to Copy always. --><!--
+    <file src="..\buildoutput\DesignFactory.WebMatrix.Executer.dll" target="content\DesignFactory.WebMatrix.Executer.dll" />
+    --><!-- DesignFactory.WebMatrix.Executer.dll file must be copied to lib folder, but not referenced.
+         This is done by explicitly specifying the references. We need it in the lib folder, otherwise 
+         the -Symbols option to NuGet pack will not copy the .pdb file in the symbols package. --><!--
+    <file src="..\buildoutput\DesignFactory.WebMatrix.Executer.dll" target="lib\DesignFactory.WebMatrix.Executer.dll" />
+    <file src="..\buildoutput\DesignFactory.WebMatrix.IExecuter.dll" target="lib\DesignFactory.WebMatrix.IExecuter.dll" />
+    <file src="..\buildoutput\DesignFactory.WebMatrix.ExecuterFactory.dll" target="lib\DesignFactory.WebMatrix.ExecuterFactory.dll" />
+    <file src="Install.ps1" target="tools\Install.ps1" />
+    <file src="readme.txt" target="readme.txt" />
+  </files>-->
+</package>
