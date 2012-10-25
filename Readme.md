@@ -32,13 +32,16 @@ modified easily: one C# and one XSLT source file, no binaries.
 
 ## Distribution: NuGet
 **RichTextBlock.Html2Xaml** is distributed as a [NuGet](http://nuget.org/packages/RichTextBlock.Html2Xaml) 
-package. The package is named **RichTextBlock.Html2Xaml**. The **WebMatrix.Executer** NuGet 
-package places two files in your Windows Store project, in the Common folder:
+package. The package is named **RichTextBlock.Html2Xaml**. The 
+**RichTextBlock.Html2Xaml** NuGet package places two files in your Windows 
+Store project, in the Common folder:
 
 - `Common\RichTextBlockHtml2Xaml.xslt`
 - `Common\RichTextBlockProperties.cs`
 
 ## Usage
+
+TODO: Add XAML snippets, html and data bound examples.
 
 ## Dev tips
 
