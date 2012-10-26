@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Markup;
 
-namespace RichTextBlockExtensions
+namespace RichTextBlockExtensions.Common
 {
     /// <summary>
     /// Usage: 
