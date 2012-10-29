@@ -3,6 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinRT-RichTextBlock.Html2Xaml", "WinRT-RichTextBlock.Html2Xaml.csproj", "{F0ECB5DE-39E9-41E3-AB8C-90E1798ADF0A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C91A7CAF-D320-489E-86B9-6E5A60B18F68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{A37EF2FB-5F4A-4674-83A2-A9346328F4DA}"
+	ProjectSection(SolutionItems) = preProject
+		PublishDocumentation.ps1 = PublishDocumentation.ps1
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{7EEBE2BA-E593-4D8D-91FA-18F42FDC8D26}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\CreatePackage.cmd = NuGet\CreatePackage.cmd
+		NuGet\Install.ps1 = NuGet\Install.ps1
+		NuGet\NuGet.exe = NuGet\NuGet.exe
+		NuGet\PublishToPublicNuGet.cmd = NuGet\PublishToPublicNuGet.cmd
+		NuGet\Readme.txt = NuGet\Readme.txt
+		NuGet\RichTextBlock.Html2Xaml.nuspec = NuGet\RichTextBlock.Html2Xaml.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +52,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A37EF2FB-5F4A-4674-83A2-A9346328F4DA} = {C91A7CAF-D320-489E-86B9-6E5A60B18F68}
+		{7EEBE2BA-E593-4D8D-91FA-18F42FDC8D26} = {C91A7CAF-D320-489E-86B9-6E5A60B18F68}
 	EndGlobalSection
 EndGlobal

@@ -20,9 +20,9 @@
     <tags>WinRT Win8 HTML XAML RichTextBlock</tags>
   </metadata>
   <files>
-    <file src="..\content\Common\RichTextBlockHtml2Xaml.xslt" target="content\Common\RichTextBlockHtml2Xaml.xslt" />
-    <file src="..\content\Common\RichTextBlockProperties.cs" target="content\Common\RichTextBlockProperties.cs" />
-    <file src="..\tools\Install.ps1" target="tools\Install.ps1" />
-    <file src="readme.txt" target="readme.txt" />
+    <file src="..\RichTextBlockHtml2Xaml.xslt" target="content\Common\RichTextBlockHtml2Xaml.xslt" />
+    <file src="..\RichTextBlockProperties.cs" target="content\Common\RichTextBlockProperties.cs" />
+    <file src="Install.ps1" target="tools\Install.ps1" />
+    <file src="Readme.txt" target="Readme.txt" />
   </files>
 </package>

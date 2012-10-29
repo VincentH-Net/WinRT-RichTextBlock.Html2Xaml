@@ -7,7 +7,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <RichTextBlock xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <RichTextBlock local:Properties.Html="Hoi daar!"  />
+        <!--<RichTextBlock xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
             <RichTextBlock.Resources>
                 <Style x:Key="Bullet" TargetType="Ellipse">
                     <Setter Property="Fill" Value="White" />
@@ -50,6 +51,6 @@
                     </InlineUIContainer>
                 </Span> e.g. to www.macaw.nl
             </Paragraph>
-        </RichTextBlock>
+        </RichTextBlock>-->
     </Grid>
 </Page>

@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.Data.Xml.Xsl;
+using Windows.Foundation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Markup;
 
-namespace RichTextBlockExtensions.Common
+namespace WinRT_RichTextBlock.Html2Xaml
 {
     /// <summary>
     /// Usage: 
@@ -63,13 +68,22 @@ namespace RichTextBlockExtensions.Common
 
             if (Html2XamlProcessor == null)
             {
-                // Read XSLT
-                Windows.Storage.StorageFile xslFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Common\RichTextBlockHtml2Xaml.xslt");
-                XmlDocument html2XamlXslDoc = await XmlDocument.LoadFromFileAsync(xslFile);
+                // Read XSLT. When Windows.ApplicationModel.DesignMode.DesignModeEnabled we cannot access the xslt from the file system, 
+                // so we use it as an embedded resource instead:
+                XmlDocument html2XamlXslDoc;
+                Assembly assembly = typeof(Properties).GetTypeInfo().Assembly;
+                using (Stream xmlStream = assembly.GetManifestResourceStream("WinRT_RichTextBlock.Html2Xaml.RichTextBlockHtml2Xaml.xslt"))
+                {
+                    StreamReader reader = new StreamReader(xmlStream);
+                    string content = await reader.ReadToEndAsync();
+                    XmlDocument d = new XmlDocument();
+                    d.LoadXml(content);
+                    html2XamlXslDoc = d;
+                }
                 Html2XamlProcessor = new XsltProcessor(html2XamlXslDoc);
             }
 
-            // Apply XSLT on XML
+            // Apply XSLT to XML
             string xaml = Html2XamlProcessor.TransformToString(xhtmlDoc.FirstChild);
             return xaml;
         }

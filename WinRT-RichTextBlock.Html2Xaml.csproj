@@ -100,33 +100,22 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Content Include="content\Common\RichTextBlockHtml2Xaml.xslt" />
-    <Content Include="NuGet\NuGet.exe" />
-    <Content Include="NuGet\readme.txt" />
-    <Content Include="Test.html">
+    <EmbeddedResource Include="RichTextBlockHtml2Xaml.xslt" />
+    <Content Include="Test\Test.html">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="content\Common\RichTextBlockProperties.cs" />
+    <Compile Include="RichTextBlockProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Test.xaml">
+    <Page Include="Test\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="NuGet\CreatePackage.cmd" />
-    <None Include="NuGet\PublishToPublicNuGet.cmd" />
-    <None Include="NuGet\RichTextBlock.Html2Xaml.nuspec" />
-    <None Include="PublishDocumentation.ps1" />
-    <None Include="Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DocumentationImages\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>
