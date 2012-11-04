@@ -40,9 +40,21 @@ Store project, in the Common folder:
 - `Common\RichTextBlockProperties.cs`
 
 ## Usage
-
-TODO: Add XAML snippets, html and data bound examples.
-
-## Dev tips
-
-TODO: add XSLT debugging and XAML result preview tips
+1) In a XAML file, declare the above namespace, e.g.:
+   xmlns:rtbx="using:WinRT_RichTextBlock.Html2Xaml"
+    
+2) In RichTextBlock controls, set or databind the Html property, e.g.:
+   <RichTextBlock rtbx:Properties.Html="{Binding ...}"/>
+   or
+   <RichTextBlock>
+		<rtbx:Properties.Html>
+			<![CDATA[
+				<p>This is a list:</p>
+				<ul>
+					<li>Item 1</li>
+					<li>Item 2</li>
+					<li>Item 3</li>
+				</ul>
+			]]>
+		</rtbx:Properties.Html>
+   </RichTextBlock>

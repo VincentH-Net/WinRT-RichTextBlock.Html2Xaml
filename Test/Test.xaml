@@ -7,8 +7,12 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <RichTextBlock local:Properties.Html="Hoi daar!"  />
-        <!--<RichTextBlock xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <RichTextBlock xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Grid.Row="0" >
             <RichTextBlock.Resources>
                 <Style x:Key="Bullet" TargetType="Ellipse">
                     <Setter Property="Fill" Value="White" />
@@ -22,35 +26,24 @@
                     <Setter Property="Margin" Value="-15,-11" />
                 </Style>
             </RichTextBlock.Resources>
-            <Paragraph>A paragraph with some
-                <Bold>bold</Bold> and some
-                <Italic>italic</Italic> text.
-            </Paragraph>
-            <Paragraph />
-            <Paragraph>Here comes an unordered list:</Paragraph>
             <Paragraph Margin="20,0,0,0">
-                <LineBreak />
-                <Span>
-                    <InlineUIContainer>
-                        <Ellipse Style="{StaticResource Bullet}" />
-                    </InlineUIContainer> Item 1
-                    <LineBreak />
-                </Span>
-                <Span>
-                    <InlineUIContainer>
-                        <Ellipse Style="{StaticResource Bullet}" />
-                    </InlineUIContainer> Item 2
-                    <LineBreak />
-                </Span>
+            <LineBreak />
+                <Span><InlineUIContainer><Ellipse Style="{StaticResource Bullet}" /></InlineUIContainer>Item 1<LineBreak /></Span>
+                <Span><InlineUIContainer><Ellipse Style="{StaticResource Bullet}" /></InlineUIContainer>Item 2a<LineBreak /></Span>
             </Paragraph>
             <Paragraph />
-            <Paragraph>Links become hyperlink buttons:
-                <Span>
-                    <InlineUIContainer>
-                        <HyperlinkButton Style="{StaticResource Link}" NavigateUri="http://www.macaw.nl">www.macaw.nl</HyperlinkButton>
-                    </InlineUIContainer>
-                </Span> e.g. to www.macaw.nl
-            </Paragraph>
-        </RichTextBlock>-->
+        </RichTextBlock>
+        <RichTextBlock Grid.Row="1">
+            <local:Properties.Html>
+                <![CDATA[
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ul>
+                ]]>
+            </local:Properties.Html>
+        </RichTextBlock>
+        <RichTextBlock Grid.Row="2" local:Properties.Html="&lt;ul&gt;&lt;li&gt;Item 1&lt;/li&gt;&lt;li&gt;Item 2&lt;/li&gt;&lt;li&gt;Item 3&lt;/li&gt;&lt;/ul&gt;" />
     </Grid>
 </Page>

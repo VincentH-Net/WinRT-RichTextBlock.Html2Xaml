@@ -7,6 +7,7 @@ using Windows.Data.Xml.Dom;
 using Windows.Data.Xml.Xsl;
 using Windows.Foundation;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
@@ -17,10 +18,23 @@ namespace WinRT_RichTextBlock.Html2Xaml
     /// <summary>
     /// Usage: 
     /// 1) In a XAML file, declare the above namespace, e.g.:
-    ///     xmlns:rtbx="using:RichTextBlockExtensions"
+    ///    xmlns:rtbx="using:WinRT_RichTextBlock.Html2Xaml"
+    ///     
     /// 2) In RichTextBlock controls, set or databind the Html property, e.g.:
     ///    <RichTextBlock rtbx:Properties.Html="{Binding ...}"/>
-    ///    TODO: show examples with literal text with html, show paragraphs
+    ///    or
+    ///    <RichTextBlock>
+    ///     <rtbx:Properties.Html>
+    ///         <![CDATA[
+    ///             <p>This is a list:</p>
+    ///             <ul>
+    ///                 <li>Item 1</li>
+    ///                 <li>Item 2</li>
+    ///                 <li>Item 3</li>
+    ///             </ul>
+    ///         ]]>
+    ///     </rtbx:Properties.Html>
+    /// </RichTextBlock>
     /// </summary>
     public class Properties : DependencyObject
     {
@@ -64,23 +78,31 @@ namespace WinRT_RichTextBlock.Html2Xaml
         {
             // Load XHTML fragment as XML document
             XmlDocument xhtmlDoc = new XmlDocument();
-            xhtmlDoc.LoadXml(xhtml);
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                // In design mode we swallow all exceptions to make editing more friendly
+                try { xhtmlDoc.LoadXml(xhtml); }
+                catch { } // For some reason code in catch is not executed when an exception occurs in design mode, so we can't display a friendly error here.
+            }
+            else
+            {
+                // When not in design mode, we let the application handle any exceptions
+                xhtmlDoc.LoadXml(xhtml);
+            }
 
             if (Html2XamlProcessor == null)
             {
-                // Read XSLT. When Windows.ApplicationModel.DesignMode.DesignModeEnabled we cannot access the xslt from the file system, 
+                // Read XSLT. In design mode we cannot access the xslt from the file system (with Build Action = Content), 
                 // so we use it as an embedded resource instead:
-                XmlDocument html2XamlXslDoc;
                 Assembly assembly = typeof(Properties).GetTypeInfo().Assembly;
-                using (Stream xmlStream = assembly.GetManifestResourceStream("WinRT_RichTextBlock.Html2Xaml.RichTextBlockHtml2Xaml.xslt"))
+                using (Stream stream = assembly.GetManifestResourceStream("WinRT_RichTextBlock.Html2Xaml.RichTextBlockHtml2Xaml.xslt"))
                 {
-                    StreamReader reader = new StreamReader(xmlStream);
+                    StreamReader reader = new StreamReader(stream);
                     string content = await reader.ReadToEndAsync();
-                    XmlDocument d = new XmlDocument();
-                    d.LoadXml(content);
-                    html2XamlXslDoc = d;
+                    XmlDocument html2XamlXslDoc = new XmlDocument();
+                    html2XamlXslDoc.LoadXml(content);
+                    Html2XamlProcessor = new XsltProcessor(html2XamlXslDoc);
                 }
-                Html2XamlProcessor = new XsltProcessor(html2XamlXslDoc);
             }
 
             // Apply XSLT to XML
