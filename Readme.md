@@ -1,7 +1,5 @@
 NuGet package: [http://nuget.org/packages/RichTextBlock.Html2Xaml](http://nuget.org/packages/RichTextBlock.Html2Xaml)
 
-DocumentUp version of the documentation: http://macawnl.github.com/RichTextBlock.Html2Xaml/
-
 # RichTextBlock.Html2Xaml
 
 ## Introduction
@@ -41,20 +39,20 @@ Store project, in the Common folder:
 
 ## Usage
 1) In a XAML file, declare the above namespace, e.g.:
-   xmlns:rtbx="using:WinRT_RichTextBlock.Html2Xaml"
+   `xmlns:rtbx="using:WinRT_RichTextBlock.Html2Xaml"`
     
 2) In RichTextBlock controls, set or databind the Html property, e.g.:
-   <RichTextBlock rtbx:Properties.Html="{Binding ...}"/>
-   or
-   <RichTextBlock>
-		<rtbx:Properties.Html>
-			<![CDATA[
-				<p>This is a list:</p>
-				<ul>
-					<li>Item 1</li>
-					<li>Item 2</li>
-					<li>Item 3</li>
-				</ul>
-			]]>
-		</rtbx:Properties.Html>
-   </RichTextBlock>
+  > `<RichTextBlock rtbx:Properties.Html="{Binding ...}"/>` or
+`    <RichTextBlock>
+ 		<rtbx:Properties.Html>
+ 			<![CDATA[
+ 				<p>This is a list:</p>
+ 				<ul>
+ 					<li>Item 1</li>
+ 					<li>Item 2</li>
+ 					<li>Item 3</li>
+ 				</ul>
+ 			]]>
+ 		</rtbx:Properties.Html>
+    </RichTextBlock>
+`
