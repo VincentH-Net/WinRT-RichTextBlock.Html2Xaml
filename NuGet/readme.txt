@@ -24,8 +24,8 @@ The XSD allows for simple modification or extension of the XAML to HTML
 conversion. Any unsupported HTML tags will be discarded, but their text content
 will be displayed.
 
-See the website http://macawnl.github.com/WinRT-RichTextBlock.Html2Xaml/ 
-for documentation and links to the source code (GitHub).
+See https://github.com/MacawNL/WinRT-RichTextBlock.Html2Xaml/ 
+for source code and documentation.
 
 NJoy rich text in your Windows 8 store apps!
 

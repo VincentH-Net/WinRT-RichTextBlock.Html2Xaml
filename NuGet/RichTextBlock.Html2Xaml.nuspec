@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>RichTextBlock.Html2Xaml</id>
-    <version>1.0.0.0</version>
+    <version>1.0.0.2</version>
     <authors>Vincent Hoogendoorn [Macaw]</authors>
     <owners>Vincent Hoogendoorn [Macaw]</owners>
     <description>
@@ -14,8 +14,8 @@
     <summary>
        Display HTML formatted text as XAML in a WinRT RichTextBlock control
     </summary>
-    <licenseUrl>http://macawnl.github.com/RichTextBlock.Html2Xaml/</licenseUrl>
-    <projectUrl>http://macawnl.github.com/RichTextBlock.Html2Xaml/</projectUrl>
+    <licenseUrl>http://github.com/MacawNL/WinRT-RichTextBlock.Html2Xaml</licenseUrl>
+    <projectUrl>http://github.com/MacawNL/WinRT-RichTextBlock.Html2Xaml</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>WinRT Win8 HTML XAML RichTextBlock</tags>
   </metadata>
