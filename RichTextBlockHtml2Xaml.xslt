@@ -48,11 +48,10 @@
     </xsl:template>
 
     <!-- Lists can only occur outside paragraphs, at the top level -->
-    <xsl:template match="/div/UL | /div/ul">
-      <Paragraph Margin="20,0,0,0"><LineBreak /><xsl:apply-templates /></Paragraph>
-    </xsl:template>
-    <xsl:template match="LI | li">
-      <Span><InlineUIContainer><Ellipse Style="{{StaticResource Bullet}}"/></InlineUIContainer><xsl:apply-templates /><LineBreak /></Span>
+    <xsl:template match="/div/UL | /div/ul"><xsl:apply-templates /></xsl:template>
+  
+    <xsl:template match="/div/UL/LI | /div/ul/LI | /div/UL/li | /div/ul/li">
+      <Paragraph Margin="20,0,0,0"><Span><InlineUIContainer><Ellipse Style="{{StaticResource Bullet}}"/></InlineUIContainer><xsl:apply-templates /><LineBreak /></Span></Paragraph>
     </xsl:template>
 
     <xsl:template match="B | b">

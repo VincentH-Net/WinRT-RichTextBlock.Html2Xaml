@@ -18,13 +18,16 @@ namespace WinRT_RichTextBlock.Html2Xaml
     /// <summary>
     /// Usage: 
     /// 1) In a XAML file, declare the above namespace, e.g.:
-    ///    xmlns:rtbx="using:WinRT_RichTextBlock.Html2Xaml"
+    ///    xmlns:common="using:WinRT_RichTextBlock.Html2Xaml"
     ///     
     /// 2) In RichTextBlock controls, set or databind the Html property, e.g.:
-    ///    <RichTextBlock rtbx:Properties.Html="{Binding ...}"/>
+    /// 
+    ///    <RichTextBlock common:Properties.Html="{Binding ...}"/>
+    ///    
     ///    or
+    ///    
     ///    <RichTextBlock>
-    ///     <rtbx:Properties.Html>
+    ///       <common:Properties.Html>
     ///         <![CDATA[
     ///             <p>This is a list:</p>
     ///             <ul>
@@ -33,8 +36,8 @@ namespace WinRT_RichTextBlock.Html2Xaml
     ///                 <li>Item 3</li>
     ///             </ul>
     ///         ]]>
-    ///     </rtbx:Properties.Html>
-    /// </RichTextBlock>
+    ///       </common:Properties.Html>
+    ///    </RichTextBlock>
     /// </summary>
     public class Properties : DependencyObject
     {
@@ -59,17 +62,60 @@ namespace WinRT_RichTextBlock.Html2Xaml
 
             // Wrap the value of the Html property in a div and convert it to a new RichTextBlock
             string xhtml = string.Format("<div>{0}</div>", e.NewValue as string);
-            string xaml = await ConvertHtmlToXamlRichTextBlock(xhtml);
-            RichTextBlock newRichText = (RichTextBlock)XamlReader.Load(xaml);
+            RichTextBlock newRichText = null;
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                // In design mode we swallow all exceptions to make editing more friendly
+                string xaml = "";
+                try {
+                    xaml = await ConvertHtmlToXamlRichTextBlock(xhtml);
+                    newRichText = (RichTextBlock)XamlReader.Load(xaml);
+                }
+                catch (Exception ex) {
+                    string errorxaml = string.Format(@"
+                        <RichTextBlock 
+                         xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+                         xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+                        >
+                            <Paragraph>An exception occurred while converting HTML to XAML: {0}</Paragraph>
+                            <Paragraph />
+                            <Paragraph>HTML:</Paragraph>
+                            <Paragraph>{1}</Paragraph>
+                            <Paragraph />
+                            <Paragraph>XAML:</Paragraph>
+                            <Paragraph>{2}</Paragraph>
+                        </RichTextBlock>",
+                        ex.Message,
+                        EncodeXml(xhtml),
+                        EncodeXml(xaml)
+                    );
+                    newRichText = (RichTextBlock)XamlReader.Load(errorxaml);
+                } // Display a friendly error in design mode.
+            }
+            else
+            {
+                // When not in design mode, we let the application handle any exceptions
+                string xaml = await ConvertHtmlToXamlRichTextBlock(xhtml);
+                newRichText = (RichTextBlock)XamlReader.Load(xaml);
+            }
 
             // Move the blocks in the new RichTextBlock to the target RichTextBlock
             richText.Blocks.Clear();
-            for (int i = newRichText.Blocks.Count - 1; i >= 0; i--)
+            if (newRichText != null)
             {
-                Block b = newRichText.Blocks[i];
-                newRichText.Blocks.RemoveAt(i);
-                richText.Blocks.Insert(0, b);
+                for (int i = newRichText.Blocks.Count - 1; i >= 0; i--)
+                {
+                    Block b = newRichText.Blocks[i];
+                    newRichText.Blocks.RemoveAt(i);
+                    richText.Blocks.Insert(0, b);
+                }
             }
+        }
+
+        private static string EncodeXml(string xml)
+        {
+            string encodedXml = xml.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;");
+            return encodedXml;
         }
 
         private static XsltProcessor Html2XamlProcessor;
@@ -78,17 +124,7 @@ namespace WinRT_RichTextBlock.Html2Xaml
         {
             // Load XHTML fragment as XML document
             XmlDocument xhtmlDoc = new XmlDocument();
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                // In design mode we swallow all exceptions to make editing more friendly
-                try { xhtmlDoc.LoadXml(xhtml); }
-                catch { } // For some reason code in catch is not executed when an exception occurs in design mode, so we can't display a friendly error here.
-            }
-            else
-            {
-                // When not in design mode, we let the application handle any exceptions
-                xhtmlDoc.LoadXml(xhtml);
-            }
+            xhtmlDoc.LoadXml(xhtml);
 
             if (Html2XamlProcessor == null)
             {
