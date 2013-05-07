@@ -38,13 +38,13 @@ Store project, in the Common folder:
 - `Common\RichTextBlockProperties.cs`
 
 ## Usage
-1) In a XAML file, declare the above namespace, e.g.:
-   `xmlns:rtbx="using:WinRT_RichTextBlock.Html2Xaml"`
+1) In a XAML file, declare the namespace of the Common folder in your project, e.g.:
+   `xmlns:common="using:WinRT_RichTextBlock.Html2Xaml.Common"`
     
 2) In RichTextBlock controls, set or databind the Html property, e.g.:
-  > `<RichTextBlock rtbx:Properties.Html="{Binding ...}"/>` or
+  > `<RichTextBlock common:Properties.Html="{Binding ...}"/>` or
 `    <RichTextBlock>
- 		<rtbx:Properties.Html>
+ 		<common:Properties.Html>
  			<![CDATA[
  				<p>This is a list:</p>
  				<ul>
@@ -53,6 +53,6 @@ Store project, in the Common folder:
  					<li>Item 3</li>
  				</ul>
  			]]>
- 		</rtbx:Properties.Html>
+ 		</common:Properties.Html>
     </RichTextBlock>
 `

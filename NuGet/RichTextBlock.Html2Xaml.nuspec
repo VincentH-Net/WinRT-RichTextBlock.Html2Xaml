@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>RichTextBlock.Html2Xaml</id>
-    <version>1.0.0.2</version>
+    <version>1.1.0.0</version>
     <authors>Vincent Hoogendoorn [Macaw]</authors>
     <owners>Vincent Hoogendoorn [Macaw]</owners>
     <description>
